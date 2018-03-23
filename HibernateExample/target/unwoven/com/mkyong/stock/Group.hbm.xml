@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<!--**************************************************** -->
+<!-- Copyright (c)2011 Cisco Systems, Inc. -->
+<!-- All rights reserved. -->
+<!--**************************************************** -->
+
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cisco.xmp.group.model">
+
+	<class name="Group" table="xgs_group" discriminator-value="G" >
+
+
+		<id name="instanceId" type="long" column="instanceId">
+		      <generator class="seqhilo">
+		        <param name="max_lo">1000</param>
+   			  </generator>
+		</id>
+
+		<discriminator column="group_type" type="string" />
+
+		<property name="instanceName" column="instanceName" />
+		<property name="description" column="description" />
+		<property name="groupNameHierarchy" column="groupNameHierarchy" length="1024" />
+		
+
+		
+		<property name="limitGroupMembership" column="limitGroupMembership"
+			type="true_false" />
+		<property name="appGroupType" column="appGroupType" />
+
+
+
+		<bag name="superGroups" table="XGS_GROUPINGROUP" lazy="true"
+			inverse="true">
+			<key>
+				<column name="CHILDID" not-null="true" 
+					unique-key="XGS_GRPINGRP_UK" />
+			</key>
+			<many-to-many class="Group" column="PARENTID"
+				foreign-key="CHILD_GROUP_FK" />
+		</bag>
+		<list name="subGroups" table="XGS_GROUPINGROUP" lazy="true">
+			<key>
+				<column name="PARENTID" not-null="true" 
+					unique-key="XGS_GRPINGRP_UK" />
+			</key>
+			<index column="idxSubGroup"/>
+			<many-to-many class="Group" column="CHILDID"
+				foreign-key="PARENT_GROUP_FK" />
+		</list>
+		
+		 
+	<filter name="dataFilter" condition=" (group_type!='G' or (group_type='G' and (appgrouptype!='ManagedNetworkElement' or groupnamehierarchy is null)) or (group_type='G' and	appgrouptype='ManagedNetworkElement' and groupnamehierarchy not like 'User Defined%' and groupnamehierarchy not like 'Location/All Location%') or (appgrouptype='ManagedNetworkElement' and instanceName='Unassigned' and groupnamehierarchy='Location/All Locations') or instanceid in (select xgs_grpMem.memberid from xgs_groupmembers xgs_grpMem where xgs_grpMem.groupid in(:domainIds)) )" />		
+	</class>
+
+  <filter-def name="dataFilter" condition=" (group_type!='G' or (group_type='G' and (appgrouptype!='ManagedNetworkElement' or groupnamehierarchy is null)) or (group_type='G' and appgrouptype='ManagedNetworkElement' and groupnamehierarchy not like 'User Defined%' and groupnamehierarchy not like 'Location/All Location%') or (appgrouptype='ManagedNetworkElement' and instanceName='Unassigned' and groupnamehierarchy='Location/All Locations') or instanceid in (select xgs_grpMem.memberid from xgs_groupmembers xgs_grpMem where xgs_grpMem.groupid in(:domainIds)) )">
+    <filter-param name="domainIds" type="long"/>
+  </filter-def>
+	<database-object>
+		<create>
+			ALTER TABLE XGS_GROUPINGROUP DROP CONSTRAINT CHILD_GROUP_FK
+	</create>
+		<drop>
+			ALTER TABLE XGS_GROUPINGROUP DROP CONSTRAINT CHILD_GROUP_FK
+	</drop>
+	</database-object>
+
+	<database-object>
+		<create>
+			ALTER TABLE XGS_GROUPINGROUP DROP CONSTRAINT PARENT_GROUP_FK
+	</create>
+		<drop>
+			ALTER TABLE XGS_GROUPINGROUP DROP CONSTRAINT PARENT_GROUP_FK
+	</drop>
+	</database-object>
+
+	<database-object>
+		<create>
+			ALTER TABLE XGS_GROUPINGROUP ADD (CONSTRAINT PARENT_GROUP_FK
+			FOREIGN KEY (CHILDID)
+			REFERENCES XGS_GROUP (INSTANCEID) ON DELETE
+			CASCADE) 
+	</create>
+		<drop>
+		</drop>
+<!--		<dialect-scope name="org.hibernate.dialect.OracleDialect"></dialect-scope>-->
+		<dialect-scope name="com.cisco.xmp.persistence.impl.dialect.Oracle11gDialect"></dialect-scope>
+	</database-object>
+
+	<database-object>
+		<create>
+			ALTER TABLE XGS_GROUPINGROUP ADD (CONSTRAINT CHILD_GROUP_FK
+			FOREIGN KEY (PARENTID)
+			REFERENCES XGS_GROUP (INSTANCEID) ON DELETE
+			CASCADE) 
+	</create>
+		<drop>
+		</drop>
+<!--		<dialect-scope name="org.hibernate.dialect.OracleDialect"></dialect-scope>-->
+		<dialect-scope name="com.cisco.xmp.persistence.impl.dialect.Oracle11gDialect"></dialect-scope>
+	</database-object>
+
+	<database-object>
+		<create>
+			ALTER TABLE XGS_GROUPINGROUP ADD CONSTRAINT PARENT_GROUP_FK
+			FOREIGN KEY (CHILDID)
+			REFERENCES XGS_GROUP (INSTANCEID) ON DELETE
+			CASCADE
+	</create>
+		<drop>
+		</drop>
+		<dialect-scope name="org.hibernate.dialect.DerbyDialect"></dialect-scope>
+	</database-object>
+
+	<database-object>
+		<create>
+			ALTER TABLE XGS_GROUPINGROUP ADD CONSTRAINT CHILD_GROUP_FK
+			FOREIGN KEY (PARENTID)
+			REFERENCES XGS_GROUP (INSTANCEID) ON DELETE
+			CASCADE		
+	</create>
+		<drop>
+		</drop>
+		<dialect-scope name="org.hibernate.dialect.DerbyDialect"></dialect-scope>
+	</database-object>
+
+</hibernate-mapping>

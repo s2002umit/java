@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+	<!-- Copyright (c) 2009, 2010 by Cisco Systems, Inc. All rights reserved. -->
+	<!-- This file is auto generated, please do not modify by hand. -->
+	<!-- -->
+	<typedef name="groupTypeList" class="org.hibernate.type.EnumType">
+		<param name="enumClass">com.cisco.apicem.group.model.GroupType</param>
+		<param name="type">12</param>
+	</typedef>
+	<class name="com.cisco.apicem.group.model.ResourceGroup" table="ResourceGroup"
+		abstract="false">
+		<id name="instanceId" column="ID" type="long" unsaved-value="0"
+			access="property">
+		</id>
+		<property name="name" type="string">
+			<column name="Name" />
+		</property>
+		<property name="groupTypeList" column="GroupTypeList">
+			<type name="com.cisco.xmp.model.framework.propertyaccessor.EnumUserType">
+				<param name="targetClass">com.cisco.apicem.group.model.GroupType</param>
+				<param name="valueOfMethod">getEnum</param>
+			</type>
+		</property>
+       
+      <one-to-one name="resourceGroupScopeRule" class="com.cisco.apicem.group.model.ResourceGroupScopeRule"  cascade="delete,merge,save-update" constrained="true" lazy="no-proxy" property-ref="resourceGroup"/>
+		<!-- <property name="groupTypeList" column="GroupTypeList" > <type name="org.hibernate.type.EnumType"> 
+			<param name="enumClass">com.cisco.apicem.group.model.GroupType</param> <param 
+			name="useNamed">true</param> </type> </property> -->
+		<filter name="dataFilter1" condition="groupTypeList like '%'||:groupType ||'%'" />
+		<filter name="dataFilter" condition="name =:groupName" />
+
+	</class>
+	
+	<query name="getGroup">from ResourceGroup</query>
+
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 April 2011 11:37:37 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.javatpoint.mypackage.Company" table="Company" e>
+		<id name="companyId" type="java.lang.Integer">
+			<column name="company_id" />
+			<generator class="identity" />
+		</id>
+
+		<property name="companyName" type="string">
+			<column name="companyName" length="20" not-null="true" unique="true" />
+		</property>
+
+		<!-- <property name="xmlConfigFile" type="com.javatpoint.mypackage.BinaryToBlobUserType">
+			<column name="XMLCONFIGFILE" />
+		</property> -->
+
+		<set name="employee" table="emp121" inverse="false" cascade="save-update">
+			<key>
+				<column name="company_id" />
+			</key>
+			<one-to-many class="com.javatpoint.mypackage.Employee" />
+		</set>
+	</class>
+</hibernate-mapping>

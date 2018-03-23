@@ -1,0 +1,54 @@
+Mon Mar 12 16:41:30 IST 2018
+com/cisco/aspect/LoggingAspect.java [warning] no match for this type name: org.apache.log4j.Category [Xlint:invalidAbsoluteTypeName]
+	
+<Unknown> [warning] Found @DeclareAnnotation while current release does not support it (see 'org.aspectj.weaver.bcel.AtAjAttributes')
+	
+com/cisco/aspect/LoggingAspect.java [warning] no match for this type name: org.apache.log4j.Category [Xlint:invalidAbsoluteTypeName]
+	
+<Unknown> [warning] Found @DeclareAnnotation while current release does not support it (see 'org.aspectj.weaver.bcel.AtAjAttributes')
+	
+com/cisco/aspect/LoggingAspect.java [warning] no match for this type name: org.apache.log4j.Category [Xlint:invalidAbsoluteTypeName]
+	
+org/hibernate/loader/Loader.java:1443 [warning] can not implement lazyTjp on this joinpoint method-call(java.lang.String org.hibernate.loader.Loader.getInstanceClass(java.sql.ResultSet, int, org.hibernate.persister.entity.Loadable, java.io.Serializable, org.hibernate.engine.SessionImplementor)) because around advice is used [Xlint:canNotImplementLazyTjp]
+	
+	see also: /Users/sumgupt2/Downloads/HibernateExample/target/classes!com/javatpoint/mypackage/XMPClassInstanciatorAspect.class::0
+Join point 'method-call(java.lang.String org.hibernate.loader.Loader.getInstanceClass(java.sql.ResultSet, int, org.hibernate.persister.entity.Loadable, java.io.Serializable, org.hibernate.engine.SessionImplementor))' in Type 'org.hibernate.loader.Loader' (Loader.java:1443) advised by around advice from 'com.javatpoint.mypackage.XMPClassInstanciatorAspect' (XMPClassInstanciatorAspect.class(from XMPClassInstanciatorAspect.java))
+	
+org/hibernate/loader/Loader.java:1465 [warning] can not implement lazyTjp on this joinpoint method-call(java.lang.Object org.hibernate.engine.SessionImplementor.instantiate(java.lang.String, java.io.Serializable)) because around advice is used [Xlint:canNotImplementLazyTjp]
+	
+	see also: /Users/sumgupt2/Downloads/HibernateExample/target/classes!com/javatpoint/mypackage/XMPClassInstanciatorAspect.class::0
+Join point 'method-call(java.lang.Object org.hibernate.engine.SessionImplementor.instantiate(java.lang.String, java.io.Serializable))' in Type 'org.hibernate.loader.Loader' (Loader.java:1465) advised by around advice from 'com.javatpoint.mypackage.XMPClassInstanciatorAspect' (XMPClassInstanciatorAspect.class(from XMPClassInstanciatorAspect.java))
+	
+com/mkyong/XMPLazyInitializerAspect.java [warning] Found @AspectJ annotations in a non @Aspect type 'com.mkyong.XMPLazyInitializerAspect'
+	
+/Users/sumgupt2/Downloads/HibernateExample/target/classes!com/cisco/aspect/LoggingAspect.class [warning] advice defined in com.cisco.aspect.LoggingAspect has not been applied [Xlint:adviceDidNotMatch]
+	
+/Users/sumgupt2/Downloads/HibernateExample/target/classes!com/cisco/aspect/UpdateFilterParamAspect.class [warning] advice defined in com.cisco.aspect.UpdateFilterParamAspect has not been applied [Xlint:adviceDidNotMatch]
+	
+Mon Mar 12 16:42:44 IST 2018
+com/cisco/aspect/LoggingAspect.java [warning] no match for this type name: org.apache.log4j.Category [Xlint:invalidAbsoluteTypeName]
+	
+<Unknown> [warning] Found @DeclareAnnotation while current release does not support it (see 'org.aspectj.weaver.bcel.AtAjAttributes')
+	
+com/cisco/aspect/LoggingAspect.java [warning] no match for this type name: org.apache.log4j.Category [Xlint:invalidAbsoluteTypeName]
+	
+<Unknown> [warning] Found @DeclareAnnotation while current release does not support it (see 'org.aspectj.weaver.bcel.AtAjAttributes')
+	
+com/cisco/aspect/LoggingAspect.java [warning] no match for this type name: org.apache.log4j.Category [Xlint:invalidAbsoluteTypeName]
+	
+org/hibernate/loader/Loader.java:1443 [warning] can not implement lazyTjp on this joinpoint method-call(java.lang.String org.hibernate.loader.Loader.getInstanceClass(java.sql.ResultSet, int, org.hibernate.persister.entity.Loadable, java.io.Serializable, org.hibernate.engine.SessionImplementor)) because around advice is used [Xlint:canNotImplementLazyTjp]
+	
+	see also: /Users/sumgupt2/Downloads/HibernateExample/target/classes!com/javatpoint/mypackage/XMPClassInstanciatorAspect.class::0
+Join point 'method-call(java.lang.String org.hibernate.loader.Loader.getInstanceClass(java.sql.ResultSet, int, org.hibernate.persister.entity.Loadable, java.io.Serializable, org.hibernate.engine.SessionImplementor))' in Type 'org.hibernate.loader.Loader' (Loader.java:1443) advised by around advice from 'com.javatpoint.mypackage.XMPClassInstanciatorAspect' (XMPClassInstanciatorAspect.class(from XMPClassInstanciatorAspect.java))
+	
+org/hibernate/loader/Loader.java:1465 [warning] can not implement lazyTjp on this joinpoint method-call(java.lang.Object org.hibernate.engine.SessionImplementor.instantiate(java.lang.String, java.io.Serializable)) because around advice is used [Xlint:canNotImplementLazyTjp]
+	
+	see also: /Users/sumgupt2/Downloads/HibernateExample/target/classes!com/javatpoint/mypackage/XMPClassInstanciatorAspect.class::0
+Join point 'method-call(java.lang.Object org.hibernate.engine.SessionImplementor.instantiate(java.lang.String, java.io.Serializable))' in Type 'org.hibernate.loader.Loader' (Loader.java:1465) advised by around advice from 'com.javatpoint.mypackage.XMPClassInstanciatorAspect' (XMPClassInstanciatorAspect.class(from XMPClassInstanciatorAspect.java))
+	
+com/mkyong/XMPLazyInitializerAspect.java [warning] Found @AspectJ annotations in a non @Aspect type 'com.mkyong.XMPLazyInitializerAspect'
+	
+/Users/sumgupt2/Downloads/HibernateExample/target/classes!com/cisco/aspect/LoggingAspect.class [warning] advice defined in com.cisco.aspect.LoggingAspect has not been applied [Xlint:adviceDidNotMatch]
+	
+/Users/sumgupt2/Downloads/HibernateExample/target/classes!com/cisco/aspect/UpdateFilterParamAspect.class [warning] advice defined in com.cisco.aspect.UpdateFilterParamAspect has not been applied [Xlint:adviceDidNotMatch]
+	

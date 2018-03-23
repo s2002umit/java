@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+  <!-- Copyright (c) 2009, 2010 by Cisco Systems, Inc. All rights reserved.-->
+  <!-- This file is auto generated, please do not modify by hand. -->
+  <!-- -->
+  <class name="com.cisco.enc.apic.inventory.view.NetworkDevice" table="NetworkDevice" abstract="false" mutable="false">
+    <id name="instanceId" column="ID" type="long" unsaved-value="0" access="property">
+      <generator class="seqhilo">
+        <param name="max_lo">1000</param>
+      </generator>
+    </id>
+    <property name="instanceVersion">
+      <column name="INSTANCE_VERSION" default="0" not-null="true"/>
+    </property>
+    <property name="instanceUuid" type="string">
+      <column name="InstanceUuid" unique="true"/>
+    </property>
+    <property name="hostname" type="string">
+      <column name="Hostname"/>
+    </property>
+    <property name="managementIpAddress" type="string">
+      <column name="ManagementIpAddress"/>
+    </property>
+    <property name="type" type="string">
+      <column name="Type"/>
+    </property>
+    <property name="family" type="string">
+      <column name="Family"/>
+    </property>
+    <property name="series" type="string">
+      <column name="Series"/>
+    </property>
+    <property name="softwareVersion" type="string">
+      <column name="SoftwareVersion"/>
+    </property>
+    <property name="upTime" type="string">
+      <column name="UpTime"/>
+    </property>
+    <property name="location" type="string">
+      <column name="Location"/>
+    </property>
+    <property name="snmpLocation" type="string">
+      <column name="SnmpLocation"/>
+    </property>
+    <property name="snmpContact" type="string">
+      <column name="SnmpContact"/>
+    </property>
+    <property name="reachabilityStatus" type="string">
+      <column name="ReachabilityStatus"/>
+    </property>
+    <property name="reachabilityFailureReason" type="string">
+      <column name="ReachabilityFailureReason"/>
+    </property>
+    <property name="macAddress" type="string">
+      <column name="MacAddress"/>
+    </property>
+    <property name="serialNumber" type="string">
+      <column name="SerialNumber"/>
+    </property>
+    <property name="platformId" type="string">
+      <column name="PlatformId"/>
+    </property>
+    <property name="memorySize" type="string">
+      <column name="MemorySize"/>
+    </property>
+    <property name="interfaceCount" type="string">
+      <column name="InterfaceCount"/>
+    </property>
+    <property name="lineCardCount" type="string">
+      <column name="LineCardCount"/>
+    </property>
+    <property name="lineCardId" type="string">
+      <column name="LineCardId"/>
+    </property>
+    <property name="bootDateTime" type="string">
+      <column name="BootDateTime"/>
+    </property>
+    <property name="locationName" type="string">
+      <column name="LocationName"/>
+    </property>
+    <property name="lastUpdated" type="string">
+      <column name="LastUpdated"/>
+    </property>
+    <property name="tunnelUdpPort" type="string">
+      <column name="TunnelUdpPort"/>
+    </property>
+    <property name="apManagerInterfaceIp" type="string">
+      <column name="ApManagerInterfaceIp"/>
+    </property>
+    <property name="role" type="string">
+      <column name="Role"/>
+    </property>
+    <property name="roleSource" type="string">
+      <column name="RoleSource"/>
+    </property>
+    <property name="tagCount" type="string">
+      <column name="TagCount"/>
+    </property>
+    <property name="collectionStatus" type="string">
+      <column name="CollectionStatus"/>
+    </property>
+    <property name="inventoryStatusDetail" type="string">
+      <column name="InventoryStatusDetail"/>
+    </property>
+    <property name="lastUpdateTime" type="timestamp">
+      <column name="LastUpdateTime"/>
+    </property>
+  </class>
+</hibernate-mapping>

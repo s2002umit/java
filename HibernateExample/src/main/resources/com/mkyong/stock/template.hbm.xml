@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+  <!-- Copyright (c) 2009, 2010 by Cisco Systems, Inc. All rights reserved.-->
+  <!-- This file is auto generated, please do not modify by hand. -->
+  <!-- -->
+  <class name="com.cisco.ifm.template.model.Template" table="Template" abstract="false">
+    <id name="instanceId" column="ID" type="long" unsaved-value="0" access="property">
+      <generator class="seqhilo">
+        <param name="max_lo">1000</param>
+      </generator>
+    </id>
+    <version name="instanceVersion" column="INSTANCE_VERSION"/>
+    <property name="instanceUuid" type="string">
+      <column name="InstanceUuid" unique="true"/>
+    </property>
+    <property name="displayName" type="string"/>
+    <property name="name" type="string">
+      <column name="Name"/>
+    </property>
+    <property name="content" type="blob">
+      <column name="Content"/>
+    </property>
+    <property name="description" type="string">
+      <column name="Description"/>
+    </property>
+    <property name="is_valid" column="Is_valid"/>
+    <set name="datafile" cascade="delete" inverse="true">
+      <key>
+        <column name="Template_ID"/>
+      </key>
+      <one-to-many class="com.cisco.ifm.template.model.Datafile"/>
+      <filter name="dataFilter" condition="AuthEntityId in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))"/>
+    </set>
+    <many-to-one name="templateAssociationOnRole" class="com.cisco.ifm.template.model.TemplateAssociationOnRole" cascade="delete">
+      <column name="TemplateAssociationOnRole_ID" unique="true"/>
+    </many-to-one>
+    <many-to-one name="templateAssociationOnRole_0" class="com.cisco.ifm.template.model.TemplateAssociationOnRole">
+      <column name="TmpltAssctnOnRl_0_ID" unique="true"/>
+    </many-to-one>
+    <set name="templateAttributes" inverse="true">
+      <key>
+        <column name="Template_ID"/>
+      </key>
+      <one-to-many class="com.cisco.ifm.template.model.TemplateAttributes"/>
+      <filter name="dataFilter" condition="AuthEntityId in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))"/>
+    </set>
+    <set name="template_1">
+      <key>
+        <column name="Sub_template_ID"/>
+      </key>
+      <one-to-many class="com.cisco.ifm.template.model.SubTemplate"/>
+      <filter name="dataFilter" condition="AuthEntityId in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))"/>
+    </set>
+    <many-to-one name="templateKeyword" class="com.cisco.ifm.template.model.TemplateKeyword" cascade="delete">
+      <column name="TemplateKeyword_ID" unique="true"/>
+    </many-to-one>
+    <set name="subTemplate" cascade="delete">
+      <key>
+        <column name="Template_ID"/>
+      </key>
+      <one-to-many class="com.cisco.ifm.template.model.SubTemplate"/>
+      <filter name="dataFilter" condition="AuthEntityId in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))"/>
+    </set>
+    <set name="templateHtmlAndOtherInfo" cascade="delete" inverse="true">
+      <key>
+        <column name="Template_ID"/>
+      </key>
+      <one-to-many class="com.cisco.ifm.template.model.TemplateHtmlAndOtherInfo"/>
+      <filter name="dataFilter" condition="AuthEntityId in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))"/>
+    </set>
+    <many-to-one name="template_group" class="com.cisco.ifm.template.model.TemplateGroup">
+      <column name="Template_group_ID"/>
+    </many-to-one>
+    <property name="authEntityId" column="AuthEntityId"/>
+    <property name="authEntityClass" column="AuthEntityClass"/>
+    <filter name="dataFilter" condition="AuthEntityId in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))"/>
+  </class>
+  <filter-def name="dataFilter" condition="ID in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))">
+    <filter-param name="domainIds" type="long"/>
+  </filter-def>
+  <filter-def name="dataFilter" condition="ID in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))">
+    <filter-param name="domainIds" type="long"/>
+  </filter-def>
+</hibernate-mapping>

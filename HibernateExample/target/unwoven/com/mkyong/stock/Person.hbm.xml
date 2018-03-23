@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 April 2011 11:37:37 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+  <class name="com.cisco.valueType.example.Person" table="person">
+    <id name="Key" column="pid" type="string">
+      <generator class="uuid" />
+    </id>
+    <map name="paramNamesAndValue" table="kSpcfctn8_msAndVls4"
+      order-by="MAPKEY">
+      <key column="OWNER_ID" />
+      <map-key column="MAPKEY" type="text" />
+      <element type="text" column="ParamNamesAndValues" />
+    </map>
+
+    <set name="additionalInfo" table="RsrcGrp_ddtnlInf" cascade="all"
+      lazy="false" >
+      <key>
+        <column name="ResourceGroup_ID" />
+      </key>
+      <composite-element
+        class="com.cisco.valueType.example.PropertyNameAndStringValue">
+        <property name="stringValue" type="string">
+          <column name="ddtnlInf_stringValue" />
+        </property>
+        <property name="propertyName" type="string">
+          <column name="ddtnlInf_propertyName" />
+        </property>
+      </composite-element>
+    </set>
+    <property name="birthday" type="date" />
+    <component name="name" class="com.cisco.valueType.example.Name"> <!-- class attribute optional -->
+      <property name="initial" />
+      <property name="first" />
+      <property name="last" />
+    </component>
+  </class>
+</hibernate-mapping>

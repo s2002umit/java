@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+  <!-- Copyright (c) 2009, 2010 by Cisco Systems, Inc. All rights reserved.-->
+  <!-- This file is auto generated, please do not modify by hand. -->
+  <!-- -->
+  <class name="com.cisco.apicem.group.model.ResourceGroupScopeRule" table="ResourceGroupScopeRule" abstract="false">
+    <comment>group-model (7.6.0.qualifier)</comment>
+    <id name="instanceId" column="ID" type="long" unsaved-value="0" access="property">
+      <generator class="seqhilo">
+        <param name="max_lo">1000</param>
+      </generator>
+    </id>
+
+    <property name="memberType" type="string">
+      <column name="MemberType"/>
+    </property>
+    <property name="rules" type="text">
+      <column name="Rules"/>
+    </property>
+    <property name="groupType" column="GroupType">
+      <type name="com.cisco.xmp.model.framework.propertyaccessor.GenericEnumSingleUserType">
+        <param name="targetClass">com.cisco.apicem.group.model.GroupType</param>
+        <param name="valueOfMethod">getEnum</param>
+      </type>
+    </property>
+
+    <many-to-one name="resourceGroup" class="com.cisco.apicem.group.model.ResourceGroup" >
+      <column name="ResourceGroup_ID" unique="true"/>
+    </many-to-one>
+    
+ 
+  </class>
+
+</hibernate-mapping>

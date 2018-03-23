@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+  <!-- Copyright (c) 2009, 2010 by Cisco Systems, Inc. All rights reserved.-->
+  <!-- This file is auto generated, please do not modify by hand. -->
+  <!-- -->
+  <class name="com.cisco.apicem.group.model.ResourceGroup1" table="ResourceGroup" abstract="false">
+    <id name="instanceId" column="ID" type="long" unsaved-value="0" access="property">
+      <generator class="seqhilo">
+        <param name="max_lo">1000</param>
+      </generator>
+    </id>
+    <version name="instanceVersion" column="INSTANCE_VERSION"/>
+    <property name="instanceUuid" type="string">
+      <column name="InstanceUuid" unique="true"/>
+    </property>
+    <property name="displayName" type="string"/>
+    <property name="name" type="string">
+      <column name="Name"/>
+    </property>
+    <property name="groupTypeList" column="GroupTypeList">
+      <type name="com.cisco.xmp.model.framework.propertyaccessor.EnumUserType">
+        <param name="targetClass">com.cisco.apicem.group.model.GroupType</param>
+        <param name="valueOfMethod">getEnum</param>
+      </type>
+    </property>
+    <set name="additionalInfo" table="RsrcGrp_ddtnlInf" cascade="all" lazy="false">
+      <key>
+        <column name="ResourceGroup_ID"/>
+      </key>
+      <many-to-many column="additionalInfo_ID" unique="true" class="com.cisco.apicem.group.model.ResourceGroupAdditionalInfo"/>
+    </set>
+    <property name="groupNameHierarchy" type="text">
+      <column name="GroupNameHierarchy"/>
+    </property>
+    <property name="groupHierarchy" type="text">
+      <column name="GroupHierarchy"/>
+    </property>
+    <property name="systemGroup" type="boolean">
+      <column name="SystemGroup" not-null="true" default="0"/>
+    </property>
+    <set name="resourceGroupRules" cascade="delete-orphan,save-update,merge,delete" inverse="true">
+      <key>
+        <column name="ResourceGroup_ID"/>
+      </key>
+      <one-to-many class="com.cisco.apicem.group.model.ResourceGroupDynamicRule"/>
+      <filter name="dataFilter" condition="AuthEntityId in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))"/>
+    </set>
+    <set name="groupMember" cascade="save-update,merge,delete-orphan,delete" inverse="true">
+      <key>
+        <column name="ResourceGroup_ID"/>
+      </key>
+      <one-to-many class="com.cisco.apicem.group.model.ResourceGroupMember"/>
+      <filter name="dataFilter" condition="AuthEntityId in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))"/>
+    </set>
+    <set name="childGroups" cascade="delete,save-update" inverse="true">
+      <key>
+        <column name="ParentGroup_ID"/>
+      </key>
+      <one-to-many class="com.cisco.apicem.group.model.ResourceGroup"/>
+      <filter name="dataFilter" condition="AuthEntityId in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))"/>
+    </set>
+    <many-to-one name="parentGroup" class="com.cisco.apicem.group.model.ResourceGroup">
+      <column name="ParentGroup_ID"/>
+    </many-to-one>
+    <property name="authEntityId" column="AuthEntityId"/>
+    <property name="authEntityClass" column="AuthEntityClass"/>
+    <filter name="dataFilter" condition="AuthEntityId in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))"/>
+    <filter name="apicDataFilter" condition="AuthEntityId in (select rgm.resourceid from resourcegroupmember rgm where rgm.resourcegroup_id in (:scopeIds))">
+      <!--Actual condition to be specified at runtime via hibernate_occ Aspect-->
+    </filter>
+  </class>
+  <filter-def name="dataFilter" condition="ID in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))">
+    <filter-param name="domainIds" type="long"/>
+  </filter-def>
+  <filter-def name="dataFilter" condition="ID in (select gm.memberid from xgs_groupmembers gm where gm.groupid in (:domainIds))">
+    <filter-param name="domainIds" type="long"/>
+  </filter-def>
+  <filter-def name="apicDataFilter" condition="AuthEntityId in (select rgm.resourceid from resourcegroupmember rgm where rgm.resourcegroup_id in (:scopeIds))">
+    <filter-param name="scopeIds" type="long"/>
+  </filter-def>
+</hibernate-mapping>

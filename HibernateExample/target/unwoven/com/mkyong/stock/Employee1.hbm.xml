@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 April 2011 11:37:37 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+   <class name="com.mkyong.stock.Employee" table="EMPLOYEE1" entity-name="employee1">
+      <meta attribute="class-description">
+         This class contains the employee detail. 
+      </meta>
+      <id name="id" type="int" column="id">
+      </id>
+      <property name="firstName" column="first_name" type="string"/>
+         <!--  <property name="lastName" column="last_name" type="string"/>
+      <property name="salary" column="salary" type="int"/>
+  <many-to-one name="address" column="address" 
+       class="com.mkyong.stock.Address" not-null="true"/> -->
+   </class>
+</hibernate-mapping>

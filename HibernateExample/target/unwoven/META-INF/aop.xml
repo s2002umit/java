@@ -1,0 +1,37 @@
+<!DOCTYPE aspectj PUBLIC
+        "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<!-- ******************************************************************* 
+	Copyright (c) 2013 Cisco Systems, Inc. All rights reserved. ******************************************************************* -->
+<aspectj>
+	<weaver>
+
+		<!-- only weave the AbstractPersistentCollection Class of hibernate -->
+		<include within="org.hibernate.collection.AbstractPersistentCollection" />
+		<include within="org.hibernate.proxy.pojo.javassist.JavassistLazyInitializer" />
+		<include within="com.mkyong.XMPLazyInitializerAspect" />
+		<include within="com.javatpoint.mypackage.XMPClassInstanciatorAspect" />
+		<include within="org.hibernate.loader.Loader" />
+		<include within="org.hibernate.impl.SessionImpl" />
+		<include within="org.hibernate.impl.StatelessSessionImpl" />
+		<include within="org.hibernate.engine.SessionImplementor" />
+		
+			<!--<include within="org.hibernate.event.SessionImpl" />
+
+
+	 <dump within="*"/>A -->
+	</weaver>
+	<aspects>
+		<!-- weave in just this aspect -->
+		<aspect name="com.mkyong.XMPLazyInitializerAspect" />
+		<aspect name="com.javatpoint.mypackage.XMPClassInstanciatorAspect" />
+
+
+		<!-- Debug Only Aspect. Should not be enabled in production. <aspect name="com.cisco.xmp.utilities.ApplicationLevelLockMonitorAspect"/> -->
+		<!-- Not enabled by default. Enable this for help in detecting DB connection 
+			leaks. Also remember to define a logger by the name "debugLeakLogger" in 
+			log4j configuration for the messages to go into the corresponding log file. 
+			<aspect name="com.cisco.xmp.utilities.hibernate.DebugLeakAspect"/> -->
+	</aspects>
+
+
+</aspectj>
